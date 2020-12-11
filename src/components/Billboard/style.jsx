@@ -10,6 +10,7 @@ const usesStyles = makeStyles(() => ({
     textAlign: "left",
     fontWeight: "bold",
     borderBottom: "black",
+    color: "white",
   },
   cards: {
     margin: "auto",
@@ -25,7 +26,7 @@ const usesStyles = makeStyles(() => ({
     margin: "auto",
   },
   media: {
-    height: 150,
+    height: 200,
   },
   spanMain: {
     padding: 10,
