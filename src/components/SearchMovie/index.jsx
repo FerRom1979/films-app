@@ -30,10 +30,10 @@ const SearchMovie = ({ callback, apiError }) => {
         </Grid>
       </Grid>
       <div>
-        {apiError !== false ? (
-          <span className={classes.spanError}>este es un error</span>
-        ) : (
-          console.log("falso")
+        {apiError && (
+          <span
+            className={classes.spanError}
+          >{`No se han en contrado resultados para " ${nameMovie} "`}</span>
         )}
       </div>
     </div>

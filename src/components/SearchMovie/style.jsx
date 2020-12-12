@@ -16,6 +16,7 @@ const usesStyles = makeStyles(() => ({
     borderRadius: 70,
   },
   spanError: {
+    fontSize: 30,
     color: "#b22a00",
   },
 }));

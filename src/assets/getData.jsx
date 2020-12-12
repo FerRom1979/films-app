@@ -31,7 +31,7 @@ export const GetData = () => {
     try {
       /* mas populares */
       const res = await axios(
-        `${URL_POPULAR}?api_key=${API_KEY}&language=en-US&page=1`
+        `${URL_POPULAR}?api_key=${API_KEY}&language=es-AR&page=1`
       );
       setMoviePopular(res.data.results);
       setApiError(false);
@@ -46,6 +46,7 @@ export const GetData = () => {
         const res = await axios(
           `${URL_SEARCH}?api_key=${API_KEY}&query=${nameMovie}`
         );
+
         const {
           backdrop_path,
           original_language,
