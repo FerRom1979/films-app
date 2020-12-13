@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-const usesStyles = makeStyles(() => ({
+const usesStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 10,
   },
@@ -16,7 +16,12 @@ const usesStyles = makeStyles(() => ({
     borderRadius: 70,
   },
   spanError: {
-    fontSize: 30,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 20,
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 30,
+    },
     color: "#b22a00",
   },
 }));

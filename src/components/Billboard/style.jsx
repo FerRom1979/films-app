@@ -7,11 +7,17 @@ const usesStyles = makeStyles((theme) => ({
     fontSize: 30,
   },
   typography: {
-    marginLeft: 20,
-    fontSize: 30,
-    textAlign: "left",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 20,
+      textAlign: "center",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 30,
+      marginLeft: 20,
+      textAlign: "left",
+    },
+
     fontWeight: "bold",
-    borderBottom: "black",
     color: "white",
   },
   cards: {
@@ -45,18 +51,22 @@ const usesStyles = makeStyles((theme) => ({
     fontSize: 14,
     color: "#ff6333",
   },
-  infoCard: {
+  /* infoCard: {
     dispaly: "flex",
     justifyContent: "center",
     justifyItems: "center",
     justifySelf: "center",
     alignItems: "baseline",
-  },
-  buttongroup: {
+  }, */
+  /*  buttongroup: {
     paddingRight: 20,
-  },
+  }, */
   iconsStart: {
     color: "#ffef62",
+    fontSize: 30,
+  },
+  iconsEye: {
+    color: "#757de8",
     fontSize: 30,
   },
   title: {
@@ -74,9 +84,22 @@ const usesStyles = makeStyles((theme) => ({
     display: "flex",
   },
   gridNorank: {
+    textAlign: "left",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
+  },
+  searchStart: {
+    fontWeight: "bold",
+    color: "white",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 20,
+      textAlign: "center",
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 30,
+      marginLeft: 20,
+      textAlign: "right",
+    },
   },
   paper: {
     position: "absolute",

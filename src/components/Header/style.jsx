@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-const usesStyles = makeStyles(() => ({
+const usesStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     backgroundColor: "#3f51b5",
@@ -8,7 +8,12 @@ const usesStyles = makeStyles(() => ({
     dixplax: "flex",
   },
   typography: {
-    fontSize: 70,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 40,
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 70,
+    },
     textAlign: "center",
     fontWeight: "bold",
     color: "white",
@@ -16,7 +21,12 @@ const usesStyles = makeStyles(() => ({
     paddingBottom: 10,
   },
   iconVideo: {
-    fontSize: 70,
+    [theme.breakpoints.down("md")]: {
+      fontSize: 50,
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 70,
+    },
     marginLeft: 10,
   },
 }));
