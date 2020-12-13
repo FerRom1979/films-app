@@ -33,7 +33,6 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
       setAverageMovie(Movie);
     }
   };
-  console.log(averageMovie);
   useEffect(() => {
     average();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -230,8 +229,15 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
             </ButtonGroup>
           </div>
         </Grid>
-        {averageMovie
-          ? averageMovie.map((item, index) => (
+        {averageMovie ? (
+          (averageMovie === undefined || averageMovie.length === 0 ? (
+            <Grid item sm={12} className={classes.gridNoStart}>
+              <Typography className={classes.noStart}>
+                no se encuentra peliculas con ese rango de calificacion
+              </Typography>
+            </Grid>
+          ) : (
+            averageMovie.map((item, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
                 <Card className={classes.cards}>
                   <CardActionArea>
@@ -295,50 +301,57 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                 </Card>
               </Grid>
             ))
-          : moviePopular &&
-            moviePopular.map((item, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                {item ? (
-                  <Card className={classes.cards}>
-                    <CardActionArea>
-                      <CardMedia
-                        className={classes.media}
-                        image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-                      />
-                    </CardActionArea>
-                    <CardActions>
-                      <div>
-                        <Button
-                          size="small"
-                          color="primary"
-                          onClick={() => openModal(item)}
-                        >
-                          ver más
-                        </Button>
-                      </div>
-                      <div>
-                        <span className={classes.spanSection}>
-                          <StarIcon className={classes.iconsStart} />
-                          {item.vote_average}
-                        </span>
-                      </div>
-                      <div>
-                        <Modal
-                          open={open}
-                          onClose={handleClose}
-                          aria-labelledby="simple-modal-title"
-                          aria-describedby="simple-modal-description"
-                        >
-                          {body}
-                        </Modal>
-                      </div>
-                    </CardActions>
-                  </Card>
-                ) : (
-                  <Loading />
-                )}
-              </Grid>
-            ))}
+          ) /*: (
+            <div>
+              <h1>no hay</h1>
+            </div>
+          ) */)
+        ) : (
+          moviePopular &&
+          moviePopular.map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              {item ? (
+                <Card className={classes.cards}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                    />
+                  </CardActionArea>
+                  <CardActions>
+                    <div>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={() => openModal(item)}
+                      >
+                        ver más
+                      </Button>
+                    </div>
+                    <div>
+                      <span className={classes.spanSection}>
+                        <StarIcon className={classes.iconsStart} />
+                        {item.vote_average}
+                      </span>
+                    </div>
+                    <div>
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                      >
+                        {body}
+                      </Modal>
+                    </div>
+                  </CardActions>
+                </Card>
+              ) : (
+                <Loading />
+              )}
+            </Grid>
+          ))
+        )}
       </Grid>
     </div>
   );
