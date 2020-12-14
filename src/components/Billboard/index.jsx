@@ -3,7 +3,6 @@ import {
   Card,
   CardActionArea,
   CardMedia,
-  CardContent,
   Grid,
   Typography,
   ButtonGroup,
@@ -13,9 +12,10 @@ import {
 } from "@material-ui/core";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import StarIcon from "@material-ui/icons/Star";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 import usesStyles from "./style";
 import Loading from "../Skeleton/index";
+import SearchMovie from "./searchMovie";
+import BodyModal from "./bodyModal";
 
 const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
   const classes = usesStyles();
@@ -61,72 +61,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <Grid item xs={12}>
-        <Card className={classes.cardMain}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.mediaModal}
-              image={`https://image.tmdb.org/t/p/w200${movilModal.backdrop_path}`}
-            />
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                className={classes.title}
-              >
-                {movilModal.original_title}
-              </Typography>
-              <Typography variant="body2" component="p">
-                {movilModal.overview}
-              </Typography>
-              <Grid item sm={12}>
-                <Typography gutterBottom variant="h6">
-                  <span className={classes.spanMain}>
-                    Estreno: {movilModal.release_date}
-                  </span>{" "}
-                </Typography>
-              </Grid>
-              <Grid container /* className={classes.infoCard} */>
-                <Grid item sm={4}>
-                  <Typography gutterBottom variant="h6">
-                    <span className={classes.spanMain}>
-                      Idioma:{" "}
-                      {movilModal.original_language === "en"
-                        ? "ingles"
-                        : "español"}
-                    </span>{" "}
-                  </Typography>
-                </Grid>
-
-                <Grid item sm={4}>
-                  <Typography gutterBottom variant="h6">
-                    <span className={classes.spanMain}>
-                      {movilModal.vote_average}
-                      <StarIcon className={classes.iconsStart} />
-                    </span>
-                  </Typography>
-                </Grid>
-                <Grid item sm={4}>
-                  <Typography gutterBottom variant="h6">
-                    <span className={classes.spanMain}>
-                      {movilModal.popularity}
-                      <VisibilityIcon className={classes.iconsEye} />{" "}
-                    </span>{" "}
-                  </Typography>
-                </Grid>
-                <Grid item sm={12}>
-                  <Typography gutterBottom variant="h6">
-                    <span className={classes.spanMain}>
-                      {movilModal.popularity === false
-                        ? "solo para mayores"
-                        : "apto todo publico"}
-                    </span>{" "}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <BodyModal movilModal={movilModal} />
       </Grid>
     </div>
   );
@@ -139,67 +74,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
       <Grid container spacing={3}>
         {infoMovie.originaTitle !== "" && (
           <Grid item xs={12}>
-            <Card className={classes.cardMain}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.mediaSearch}
-                  image={`https://image.tmdb.org/t/p/w200${infoMovie.backdropPath}`}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="h2"
-                    className={classes.title}
-                  >
-                    {infoMovie.originaTitle}
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    {infoMovie.overview}
-                  </Typography>
-                  <Grid container className={classes.infoCard}>
-                    <Grid item sm={4} xs={6}>
-                      <Typography gutterBottom variant="h6">
-                        <span className={classes.spanMain}>
-                          Idioma: {movilModal.original_language}
-                        </span>{" "}
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={4} xs={6}>
-                      <Typography gutterBottom variant="h6">
-                        <span className={classes.spanMain}>
-                          Estreno: {movilModal.release_date}
-                        </span>{" "}
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={4} xs={6}>
-                      <Typography gutterBottom variant="h6">
-                        <span className={classes.spanMain}>
-                          {movilModal.vote_average}
-                          <StarIcon className={classes.iconsStart} />
-                        </span>
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6}>
-                      <Typography gutterBottom variant="h6">
-                        <span className={classes.spanMain}>
-                          Vistas: {movilModal.popularity}
-                        </span>{" "}
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={6}>
-                      <Typography gutterBottom variant="h6">
-                        <span className={classes.spanMain}>
-                          {movilModal.popularity === false
-                            ? "solo para mayores"
-                            : "apto todo publico"}
-                        </span>{" "}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <SearchMovie infoMovie={infoMovie} movilModal={movilModal} />
           </Grid>
         )}
 
@@ -230,7 +105,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
           </div>
         </Grid>
         {averageMovie ? (
-          (averageMovie === undefined || averageMovie.length === 0 ? (
+          averageMovie === undefined || averageMovie.length === 0 ? (
             <Grid item sm={12} className={classes.gridNoStart}>
               <Typography className={classes.noStart}>
                 no se encuentra peliculas con ese rango de calificacion
@@ -245,31 +120,6 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                       className={classes.media}
                       image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                     />
-                    <div>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={() => openModal(item)}
-                      >
-                        ver más
-                      </Button>
-                    </div>
-                    <div>
-                      <span className={classes.spanSection}>
-                        <StarIcon className={classes.onsStart} />
-                        {item.vote_average}
-                      </span>
-                    </div>
-                    <div>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                      >
-                        {body}
-                      </Modal>
-                    </div>
                   </CardActionArea>
                   <CardActions>
                     <div>
@@ -301,11 +151,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                 </Card>
               </Grid>
             ))
-          ) /*: (
-            <div>
-              <h1>no hay</h1>
-            </div>
-          ) */)
+          )
         ) : (
           moviePopular &&
           moviePopular.map((item, index) => (
