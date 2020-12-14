@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const usesStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "#3f51b5",
+    backgroundColor: "#2c3872",
   },
   gridHeader: {
     dixplax: "flex",
