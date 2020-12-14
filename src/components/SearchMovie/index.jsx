@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
-import LocalMoviesIcon from "@material-ui/icons/LocalMovies";
+import SearchIcon from "@material-ui/icons/Search";
 import usesStyles from "./style";
 
 const SearchMovie = ({ callback, apiError }) => {
@@ -24,7 +24,7 @@ const SearchMovie = ({ callback, apiError }) => {
               onChange={(e) => setNameMovie(e.target.value)}
             />
             <Button type="submit">
-              <LocalMoviesIcon className={classes.icons} />
+              <SearchIcon className={classes.icons} />
             </Button>
           </form>
         </Grid>

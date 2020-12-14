@@ -19,7 +19,7 @@ const BodyModal = ({ movilModal }) => {
         <CardActionArea>
           <CardMedia
             className={classes.mediaModal}
-            image={`https://image.tmdb.org/t/p/w200${movilModal.backdrop_path}`}
+            image={`https://image.tmdb.org/t/p/w500${movilModal.backdrop_path}`}
           />
           <CardContent>
             <Typography

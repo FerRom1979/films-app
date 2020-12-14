@@ -23,14 +23,14 @@ const usesStyles = makeStyles((theme) => ({
   cards: {
     margin: "auto",
     maxWidth: 400,
-    minHeight: 600,
-    maxHeight: 600,
+    minHeight: 550,
+    maxHeight: 550,
   },
   cardMain: {
     textAlign: "center",
-    maxWidth: 600,
-    minHeight: 600,
-    maxHeight: 600,
+    maxWidth: 550,
+    minHeight: 550,
+    maxHeight: 550,
     margin: "auto",
   },
   media: {
@@ -51,16 +51,6 @@ const usesStyles = makeStyles((theme) => ({
     fontSize: 14,
     color: "#ff6333",
   },
-  /* infoCard: {
-    dispaly: "flex",
-    justifyContent: "center",
-    justifyItems: "center",
-    justifySelf: "center",
-    alignItems: "baseline",
-  }, */
-  /*  buttongroup: {
-    paddingRight: 20,
-  }, */
   iconsStart: {
     color: "#ffef62",
     fontSize: 30,
@@ -84,7 +74,12 @@ const usesStyles = makeStyles((theme) => ({
     display: "flex",
   },
   gridNorank: {
-    textAlign: "left",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+    },
+    [theme.breakpoints.up("md")]: {
+      textAlign: "center",
+    },
     display: "flex",
     alignItems: "center",
   },
@@ -101,9 +96,14 @@ const usesStyles = makeStyles((theme) => ({
       textAlign: "right",
     },
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   paper: {
     position: "absolute",
-    width: 600,
+    width: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -114,6 +114,9 @@ const usesStyles = makeStyles((theme) => ({
     width: "100vh",
     height: "100vh",
   },
+  buttongroup: {
+    textAlign: "center",
+  },
   noStart: {
     [theme.breakpoints.down("md")]: {
       fontSize: 20,
@@ -122,6 +125,9 @@ const usesStyles = makeStyles((theme) => ({
       fontSize: 30,
     },
     color: "#ba000d",
+  },
+  cardAction: {
+    textAlign: "center",
   },
 }));
 export default usesStyles;

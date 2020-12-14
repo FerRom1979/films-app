@@ -8,21 +8,18 @@ import {
   ButtonGroup,
   Button,
   CardActions,
-  Modal,
 } from "@material-ui/core";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import StarIcon from "@material-ui/icons/Star";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import usesStyles from "./style";
 import Loading from "../Skeleton/index";
 import SearchMovie from "./searchMovie";
-import BodyModal from "./bodyModal";
 
 const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
   const classes = usesStyles();
   const [averageMovie, setAverageMovie] = useState(moviePopular);
   const [startNumber, setStartNumber] = useState(10);
-  const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
   const [movilModal, setMovilModal] = useState(infoMovie);
 
   const average = async () => {
@@ -37,47 +34,25 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
     average();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startNumber]);
-  /* modal */
-  function rand() {
-    return Math.round(Math.random() * 20) - 10;
-  }
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
 
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <Grid item xs={12}>
-        <BodyModal movilModal={movilModal} />
-      </Grid>
-    </div>
-  );
   const openModal = (item) => {
-    handleOpen();
     setMovilModal(item);
   };
   return (
     <div>
       <Grid container spacing={3}>
-        {infoMovie.originaTitle !== "" && (
-          <Grid item xs={12}>
+        {infoMovie && (
+          <Grid item sm={12}>
+            <Button
+              size="large"
+              startIcon={<ArrowBackIcon />}
+              onClick={() => console.log("funciona")}
+            >
+              volver
+            </Button>
             <SearchMovie infoMovie={infoMovie} movilModal={movilModal} />
           </Grid>
         )}
-
         <Grid item sm={12} md={4}>
           <Typography variant="h5" className={classes.typography}>
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
@@ -89,20 +64,18 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
           </Typography>
         </Grid>
         <Grid item sm={12} md={4} className={classes.gridNorank}>
-          <div>
-            <ButtonGroup
-              size="small"
-              aria-label="small outlined button group"
-              color="secondary"
-              className={classes.buttongroup}
-            >
-              <Button onClick={() => setStartNumber(2)}>UNO</Button>
-              <Button onClick={() => setStartNumber(4)}>DOS</Button>
-              <Button onClick={() => setStartNumber(6)}>TRES</Button>
-              <Button onClick={() => setStartNumber(8)}>CUATRO</Button>
-              <Button onClick={() => setStartNumber(10)}>CINCO</Button>
-            </ButtonGroup>
-          </div>
+          <ButtonGroup
+            size="small"
+            aria-label="small outlined button group"
+            color="secondary"
+            className={classes.buttongroup}
+          >
+            <Button onClick={() => setStartNumber(2)}>UNO</Button>
+            <Button onClick={() => setStartNumber(4)}>DOS</Button>
+            <Button onClick={() => setStartNumber(6)}>TRES</Button>
+            <Button onClick={() => setStartNumber(8)}>CUATRO</Button>
+            <Button onClick={() => setStartNumber(10)}>CINCO</Button>
+          </ButtonGroup>
         </Grid>
         {averageMovie ? (
           averageMovie === undefined || averageMovie.length === 0 ? (
@@ -118,10 +91,10 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
-                      image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                      image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                     />
                   </CardActionArea>
-                  <CardActions>
+                  <CardActions className={classes.cardAction}>
                     <div>
                       <Button
                         size="small"
@@ -138,14 +111,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                       </span>
                     </div>
                     <div>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                      >
-                        {body}
-                      </Modal>
+                      {/* <ModalComponent movilModal={movilModal} /> */}
                     </div>
                   </CardActions>
                 </Card>
@@ -164,7 +130,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                       image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                     />
                   </CardActionArea>
-                  <CardActions>
+                  <CardActions className={classes.cardAction}>
                     <div>
                       <Button
                         size="small"
@@ -181,14 +147,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
                       </span>
                     </div>
                     <div>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                      >
-                        {body}
-                      </Modal>
+                      {/* <ModalComponent movilModal={movilModal} /> */}
                     </div>
                   </CardActions>
                 </Card>

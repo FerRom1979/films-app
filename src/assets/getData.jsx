@@ -6,16 +6,7 @@ export const GetData = () => {
   const [moviePopular, setMoviePopular] = useState();
   const [apiError, setApiError] = useState(false);
   const [apiErrorPopular, setapiErrorPopular] = useState(false);
-  const [infoMovie, setInfoMovie] = useState({
-    backdropPath: "",
-    originalLanguage: "",
-    originaTitle: "",
-    overview: "",
-    popularity: 0,
-    releaseDate: "",
-    voteAverage: 0,
-    voteCount: 0,
-  });
+  const [infoMovie, setInfoMovie] = useState();
 
   const URL_POPULAR = "https://api.themoviedb.org/3/movie/popular";
   const URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
@@ -44,29 +35,10 @@ export const GetData = () => {
     if (nameMovie !== "") {
       try {
         const res = await axios(
-          `${URL_SEARCH}?api_key=${API_KEY}&query=${nameMovie}`
+          `${URL_SEARCH}?api_key=${API_KEY}&query=${nameMovie}&language=es-AR`
         );
 
-        const {
-          backdrop_path,
-          original_language,
-          original_title,
-          overview,
-          popularity,
-          release_date,
-          vote_average,
-          vote_count,
-        } = res.data.results[0];
-        setInfoMovie({
-          backdropPath: backdrop_path,
-          originalLanguage: original_language,
-          originaTitle: original_title,
-          overview: overview,
-          popularity: popularity,
-          releaseDate: release_date,
-          voteAverage: vote_average,
-          voteCount: vote_count,
-        });
+        setInfoMovie(res.data.results);
       } catch (error) {
         if (error) {
           setApiError(true);
