@@ -10,12 +10,12 @@ import {
 import BodyModal from "./bodyModal";
 import usesStyles from "./style";
 
-const SearchMovie = ({ infoMovie }) => {
+const SearchMovie = ({ infoMovie, averaSearch }) => {
   const classes = usesStyles();
   const [movilModal, setMovilModal] = useState(infoMovie);
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
-
+  console.log(averaSearch);
   const openModal = (item) => {
     setMovilModal(item);
     handleOpen();
