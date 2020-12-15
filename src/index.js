@@ -2,10 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import {
+  BrowserRouter as Router,
+  Switch as SwitchItem,
+  Route,
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <SwitchItem>
+        <Route exact path="/" component={App} />
+      </SwitchItem>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

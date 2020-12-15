@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardActionArea,
-  CardMedia,
-  Grid,
-  Typography,
-  ButtonGroup,
-  Button,
-  CardActions,
-} from "@material-ui/core";
+import { Grid, Typography, ButtonGroup, Button } from "@material-ui/core";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import StarIcon from "@material-ui/icons/Star";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import usesStyles from "./style";
-import Loading from "../Skeleton/index";
+import MoviePopular from "./moviePopular";
 import SearchMovie from "./searchMovie";
+import AverageMovie from "./averageMovie";
 
 const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
   const classes = usesStyles();
   const [averageMovie, setAverageMovie] = useState(moviePopular);
+  const [averaSearch, setAveraSearch] = useState(infoMovie);
   const [startNumber, setStartNumber] = useState(10);
-  const [movilModal, setMovilModal] = useState(infoMovie);
+  const [movilModal] = useState(infoMovie);
 
   const average = async () => {
     if (moviePopular) {
@@ -29,41 +22,27 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
       });
       setAverageMovie(Movie);
     }
+    if (infoMovie) {
+      const Movie = await infoMovie.filter((item) => {
+        return item.vote_average <= startNumber;
+      });
+      setAveraSearch(Movie);
+    }
   };
   useEffect(() => {
     average();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startNumber]);
-
-  const openModal = (item) => {
-    setMovilModal(item);
-  };
+  console.log(nameMovie);
   return (
     <div>
       <Grid container spacing={3}>
-        {infoMovie && (
-          <Grid item sm={12}>
-            <Button
-              size="large"
-              startIcon={<ArrowBackIcon />}
-              onClick={() => console.log("funciona")}
-            >
-              volver
-            </Button>
-            <SearchMovie infoMovie={infoMovie} movilModal={movilModal} />
-          </Grid>
-        )}
-        <Grid item sm={12} md={4}>
-          <Typography variant="h5" className={classes.typography}>
-            Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
-          </Typography>
-        </Grid>
-        <Grid item sm={12} md={4}>
+        <Grid item sm={12} md={6}>
           <Typography className={classes.searchStart}>
             Buscar por <StarIcon className={classes.iconsStart} />
           </Typography>
         </Grid>
-        <Grid item sm={12} md={4} className={classes.gridNorank}>
+        <Grid item sm={12} md={6} className={classes.gridNorank}>
           <ButtonGroup
             size="small"
             aria-label="small outlined button group"
@@ -77,6 +56,37 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
             <Button onClick={() => setStartNumber(10)}>CINCO</Button>
           </ButtonGroup>
         </Grid>
+        {infoMovie && (
+          <Grid item sm={12}>
+            <Button
+              size="large"
+              startIcon={<ArrowBackIcon />}
+              onClick={() => (window.location.href = "/")}
+            >
+              volver
+            </Button>
+            {infoMovie &&
+              (nameMovie === nameMovie ? (
+                <SearchMovie
+                  averaSearch={averaSearch}
+                  movilModal={movilModal}
+                  infoMovie={averaSearch}
+                />
+              ) : (
+                <SearchMovie
+                  averaSearch={averaSearch}
+                  movilModal={movilModal}
+                  infoMovie={infoMovie}
+                />
+              ))}
+          </Grid>
+        )}
+        <Grid item sm={12}>
+          <Typography variant="h5" className={classes.typography}>
+            Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
+          </Typography>
+        </Grid>
+
         {averageMovie ? (
           averageMovie === undefined || averageMovie.length === 0 ? (
             <Grid item sm={12} className={classes.gridNoStart}>
@@ -85,77 +95,24 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
               </Typography>
             </Grid>
           ) : (
-            averageMovie.map((item, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card className={classes.cards}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    />
-                  </CardActionArea>
-                  <CardActions className={classes.cardAction}>
-                    <div>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={() => openModal(item)}
-                      >
-                        ver más
-                      </Button>
-                    </div>
-                    <div>
-                      <span className={classes.spanSection}>
-                        <StarIcon className={classes.iconsStart} />
-                        {item.vote_average}
-                      </span>
-                    </div>
-                    <div>
-                      {/* <ModalComponent movilModal={movilModal} /> */}
-                    </div>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))
+            <Grid item sm={12}>
+              <AverageMovie
+                averageMovie={averageMovie}
+                movilModal={movilModal}
+                infoMovie={infoMovie}
+              />
+            </Grid>
           )
         ) : (
-          moviePopular &&
-          moviePopular.map((item, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              {item ? (
-                <Card className={classes.cards}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-                    />
-                  </CardActionArea>
-                  <CardActions className={classes.cardAction}>
-                    <div>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={() => openModal(item)}
-                      >
-                        ver más
-                      </Button>
-                    </div>
-                    <div>
-                      <span className={classes.spanSection}>
-                        <StarIcon className={classes.iconsStart} />
-                        {item.vote_average}
-                      </span>
-                    </div>
-                    <div>
-                      {/* <ModalComponent movilModal={movilModal} /> */}
-                    </div>
-                  </CardActions>
-                </Card>
-              ) : (
-                <Loading />
-              )}
+          moviePopular && (
+            <Grid item sm={12}>
+              <MoviePopular
+                moviePopular={moviePopular}
+                movilModal={movilModal}
+                infoMovie={infoMovie}
+              />
             </Grid>
-          ))
+          )
         )}
       </Grid>
     </div>

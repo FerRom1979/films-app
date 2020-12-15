@@ -12,6 +12,7 @@ const SearchMovie = ({ callback, apiError }) => {
     e.preventDefault();
     e.target.reset();
     callback(nameMovie);
+    setNameMovie("");
   };
 
   return (

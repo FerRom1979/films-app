@@ -8,8 +8,9 @@ import {
 } from "@material-ui/core";
 import BodyModal from "./bodyModal";
 import usesStyles from "./style";
+import Loading from "../Skeleton/index";
 
-const AverageMovie = ({ averageMovie, infoMovie }) => {
+const MoviePopular = ({ moviePopular, infoMovie }) => {
   const classes = usesStyles();
   const [open, setOpen] = useState(false);
   const [movilModal, setMovilModal] = useState(infoMovie);
@@ -52,27 +53,32 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
   return (
     <div>
       <Grid container spacing={3}>
-        {averageMovie &&
-          averageMovie.map((item, index) => (
+        {moviePopular &&
+          moviePopular.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card className={classes.cards}>
-                <CardActionArea onClick={() => openModal(item)}>
-                  <CardMedia
-                    className={classes.media}
-                    image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                  />
-                </CardActionArea>
-              </Card>
-              <div>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
-              </div>
+              {item ? (
+                <Card className={classes.cards}>
+                  <CardActionArea onClick={() => openModal(item)}>
+                    <CardMedia
+                      className={classes.media}
+                      image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                    />
+                  </CardActionArea>
+
+                  <div>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="simple-modal-title"
+                      aria-describedby="simple-modal-description"
+                    >
+                      {body}
+                    </Modal>
+                  </div>
+                </Card>
+              ) : (
+                <Loading />
+              )}
             </Grid>
           ))}
       </Grid>
@@ -80,4 +86,4 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
   );
 };
 
-export default AverageMovie;
+export default MoviePopular;
