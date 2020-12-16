@@ -5,7 +5,9 @@ import {
   CardActionArea,
   CardMedia,
   Modal,
+  Typography,
 } from "@material-ui/core";
+import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import BodyModal from "./bodyModal";
 import usesStyles from "./style";
 
@@ -52,6 +54,11 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
   return (
     <div>
       <Grid container spacing={3}>
+        <Grid item sm={12}>
+          <Typography variant="h5" className={classes.typography}>
+            Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
+          </Typography>
+        </Grid>
         {averageMovie &&
           averageMovie.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>

@@ -5,10 +5,12 @@ import {
   CardActionArea,
   CardMedia,
   Modal,
+  Typography,
 } from "@material-ui/core";
 import BodyModal from "./bodyModal";
 import usesStyles from "./style";
 import Loading from "../Skeleton/index";
+import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 
 const MoviePopular = ({ moviePopular, infoMovie }) => {
   const classes = usesStyles();
@@ -53,6 +55,11 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
   return (
     <div>
       <Grid container spacing={3}>
+        <Grid item sm={12}>
+          <Typography variant="h5" className={classes.typography}>
+            Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
+          </Typography>
+        </Grid>
         {moviePopular &&
           moviePopular.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>

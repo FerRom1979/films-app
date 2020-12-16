@@ -6,15 +6,14 @@ import usesStyles from "./style";
 const SearchMovie = ({ callback, apiError }) => {
   const classes = usesStyles();
   const [nameMovie, setNameMovie] = useState("");
+  const [checked, setChecked] = useState(false);
 
   /* get name movie*/
   const getMovie = (e) => {
     e.preventDefault();
     e.target.reset();
-    callback(nameMovie);
-    setNameMovie("");
+    callback(nameMovie, checked);
   };
-
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
@@ -24,7 +23,7 @@ const SearchMovie = ({ callback, apiError }) => {
               label="Busca tu Peli"
               onChange={(e) => setNameMovie(e.target.value)}
             />
-            <Button type="submit">
+            <Button type="submit" onClick={() => setChecked(true)}>
               <SearchIcon className={classes.icons} />
             </Button>
           </form>

@@ -9,6 +9,7 @@ function App() {
     callback,
     moviePopular,
     infoMovie,
+    newNameMovie,
     nameMovie,
     apiError,
     apiErrorPopular,
@@ -23,6 +24,7 @@ function App() {
         infoMovie={infoMovie}
         nameMovie={nameMovie}
         apiErrorPopular={apiErrorPopular}
+        newNameMovie={newNameMovie}
       />
     </div>
   );

@@ -74,13 +74,8 @@ const usesStyles = makeStyles((theme) => ({
     display: "flex",
   },
   gridNorank: {
-    [theme.breakpoints.down("md")]: {
-      textAlign: "center",
-    },
-    [theme.breakpoints.up("md")]: {
-      textAlign: "center",
-    },
     display: "flex",
+    justifyContent: "center",
     alignItems: "center",
   },
   searchStart: {
@@ -91,9 +86,9 @@ const usesStyles = makeStyles((theme) => ({
       textAlign: "center",
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: 30,
+      fontSize: 20,
       marginLeft: 20,
-      textAlign: "right",
+      textAlign: "center",
     },
   },
   modal: {
@@ -106,7 +101,7 @@ const usesStyles = makeStyles((theme) => ({
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
-    boxShadow: theme.shadows[5],
+    boxShadow: [2],
     padding: theme.spacing(2, 4, 3),
   },
   gridNoStart: {
