@@ -7,13 +7,15 @@ export const GetData = () => {
   const [apiError, setApiError] = useState(false);
   const [apiErrorPopular, setapiErrorPopular] = useState(false);
   const [infoMovie, setInfoMovie] = useState();
+  const [newNameMovie, setNewNameMovie] = useState(false);
 
   const URL_POPULAR = "https://api.themoviedb.org/3/movie/popular";
   const URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
   const API_KEY = process.env.REACT_APP_NOT_SECRET_CODE_API_KEY;
   /* get name movie */
-  const callback = (nameMovie) => {
+  const callback = (nameMovie, checked) => {
     setNameMovie(nameMovie);
+    setNewNameMovie(checked);
   };
 
   /* call api popular */
@@ -58,6 +60,7 @@ export const GetData = () => {
     moviePopular,
     infoMovie,
     nameMovie,
+    newNameMovie,
     apiError,
     apiErrorPopular,
   };

@@ -10,12 +10,11 @@ import {
 import BodyModal from "./bodyModal";
 import usesStyles from "./style";
 
-const SearchMovie = ({ infoMovie, averaSearch }) => {
+const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
   const classes = usesStyles();
   const [movilModal, setMovilModal] = useState(infoMovie);
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
-  console.log(averaSearch);
   const openModal = (item) => {
     setMovilModal(item);
     handleOpen();
@@ -50,6 +49,7 @@ const SearchMovie = ({ infoMovie, averaSearch }) => {
       </Grid>
     </div>
   );
+
   return (
     <div>
       <Grid container spacing={3}>

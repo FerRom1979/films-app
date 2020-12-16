@@ -55,7 +55,7 @@ const BodyModal = ({ movilModal }) => {
               <Grid item sm={4}>
                 <Typography gutterBottom variant="h6">
                   <span className={classes.spanMain}>
-                    {movilModal.vote_average}
+                    {Math.round(movilModal.vote_average / 2)}
                     <StarIcon className={classes.iconsStart} />
                   </span>
                 </Typography>
