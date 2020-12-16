@@ -54,7 +54,7 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
   );
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         <Grid item sm={12}>
           <Typography variant="h5" className={classes.typography}>
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />

@@ -101,7 +101,7 @@ const usesStyles = makeStyles((theme) => ({
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
-    boxShadow: [2],
+    boxShadow: "1px 1px 1px white",
     padding: theme.spacing(2, 4, 3),
   },
   gridNoStart: {
