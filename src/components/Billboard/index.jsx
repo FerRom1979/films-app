@@ -14,7 +14,8 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
   const [averaSearch, setAveraSearch] = useState(infoMovie);
   const [startNumber, setStartNumber] = useState(10);
   const [movilModal] = useState(infoMovie);
-  const ratingChanged = (newRating) => {
+
+  const ratingChanged = async (newRating) => {
     setStartNumber(newRating * 2);
   };
   const average = async () => {
@@ -31,11 +32,12 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
       setAveraSearch(Movie);
     }
   };
+
   useEffect(() => {
     average();
+    setAveraSearch(infoMovie);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startNumber]);
-
+  }, [startNumber, infoMovie]);
   return (
     <div>
       <Container maxWidth="xl">
@@ -52,7 +54,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
           />
         </Grid>
         {/* ********* resultados de peliculas seleccionadas******* */}
-        {infoMovie && (
+        {infoMovie ? (
           <Grid item sm={12}>
             <Button
               size="large"
@@ -72,10 +74,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
               </Grid>
             )}
           </Grid>
-        )}
-        {/****************peliculas populares************** */}
-
-        {averageMovie && infoMovie === undefined ? (
+        ) : averageMovie && infoMovie === undefined ? (
           averageMovie === undefined || averageMovie.length === 0 ? (
             <Grid item sm={12} className={classes.gridNoStart}>
               <Typography className={classes.noStart}>
