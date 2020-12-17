@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Grid, Typography, Button, Container } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import usesStyles from "./style";
-import MoviePopular from "./moviePopular";
-import SearchMovie from "./searchMovie";
-import AverageMovie from "./averageMovie";
+import MoviePopular from "../MoviePopular/index";
+import SearchMovie from "../MovieFinder/index";
+import AverageMovie from "../AverageMovie/index";
 import ReactStars from "react-stars";
 
 const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
@@ -64,7 +64,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
             {infoMovie && (
               <Grid item sm={12}>
                 <SearchMovie
-                  infoMovie={infoMovie}
+                  infoMovie={averaSearch}
                   movilModal={movilModal}
                   averaSearch={averaSearch}
                   nameMovie={nameMovie}

@@ -40,7 +40,7 @@ const BodyModal = ({ movilModal }) => {
                 </span>{" "}
               </Typography>
             </Grid>
-            <Grid container /* className={classes.infoCard} */>
+            <Grid container className={classes.infoCard}>
               <Grid item sm={4}>
                 <Typography gutterBottom variant="h6">
                   <span className={classes.spanMain}>

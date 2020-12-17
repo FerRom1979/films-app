@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
-import BodyModal from "./bodyModal";
+import BodyModal from "../BodyModal";
 import usesStyles from "./style";
 
 const AverageMovie = ({ averageMovie, infoMovie }) => {
@@ -51,6 +51,7 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
       </Grid>
     </div>
   );
+
   return (
     <div>
       <Grid container spacing={1}>

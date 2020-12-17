@@ -7,7 +7,7 @@ import {
   CardActions,
   Modal,
 } from "@material-ui/core";
-import BodyModal from "./bodyModal";
+import BodyModal from "../BodyModal";
 import usesStyles from "./style";
 
 const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {

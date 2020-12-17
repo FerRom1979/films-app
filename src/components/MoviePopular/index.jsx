@@ -7,7 +7,7 @@ import {
   Modal,
   Typography,
 } from "@material-ui/core";
-import BodyModal from "./bodyModal";
+import BodyModal from "../BodyModal";
 import usesStyles from "./style";
 import Loading from "../Skeleton/index";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
