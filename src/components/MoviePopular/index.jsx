@@ -15,7 +15,7 @@ import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 const MoviePopular = ({ moviePopular, infoMovie }) => {
   const classes = usesStyles();
   const [open, setOpen] = useState(false);
-  const [movilModal, setMovilModal] = useState(infoMovie);
+  const [movilModal, setMovilModal] = useState();
   const [modalStyle] = useState(getModalStyle);
 
   const openModal = (item) => {
@@ -54,7 +54,7 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
   );
   return (
     <div>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         <Grid item sm={12}>
           <Typography variant="h5" className={classes.typography}>
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
@@ -71,23 +71,22 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
                       image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                     />
                   </CardActionArea>
-
-                  <div>
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="simple-modal-title"
-                      aria-describedby="simple-modal-description"
-                    >
-                      {body}
-                    </Modal>
-                  </div>
                 </Card>
               ) : (
                 <Loading />
               )}
             </Grid>
           ))}
+        <div>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
       </Grid>
     </div>
   );

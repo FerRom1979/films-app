@@ -54,7 +54,7 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
 
   return (
     <div>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         <Grid item sm={12}>
           <Typography variant="h5" className={classes.typography}>
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
@@ -71,18 +71,18 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
                   />
                 </CardActionArea>
               </Card>
-              <div>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
-              </div>
             </Grid>
           ))}
+        <div>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
       </Grid>
     </div>
   );

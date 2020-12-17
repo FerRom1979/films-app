@@ -12,7 +12,7 @@ import usesStyles from "./style";
 
 const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
   const classes = usesStyles();
-  const [movilModal, setMovilModal] = useState(infoMovie);
+  const [movilModal, setMovilModal] = useState();
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const openModal = (item) => {
@@ -52,7 +52,7 @@ const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
 
   return (
     <div>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         {infoMovie &&
           infoMovie.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
@@ -65,18 +65,18 @@ const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
                 </CardActionArea>
                 <CardActions className={classes.cardAction}></CardActions>
               </Card>
-              <div>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
-              </div>
             </Grid>
           ))}
+        <div>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
       </Grid>
     </div>
   );
