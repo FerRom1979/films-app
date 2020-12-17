@@ -71,18 +71,18 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
                   />
                 </CardActionArea>
               </Card>
-              <div>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
-              </div>
             </Grid>
           ))}
+        <div>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+        </div>
       </Grid>
     </div>
   );
