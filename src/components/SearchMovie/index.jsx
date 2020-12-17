@@ -6,13 +6,13 @@ import usesStyles from "./style";
 const SearchMovie = ({ callback, apiError }) => {
   const classes = usesStyles();
   const [nameMovie, setNameMovie] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [page, setPage] = useState(1);
 
   /* get name movie*/
   const getMovie = (e) => {
     e.preventDefault();
     e.target.reset();
-    callback(nameMovie, checked);
+    callback(nameMovie, page);
   };
   return (
     <div className={classes.root}>
@@ -23,8 +23,11 @@ const SearchMovie = ({ callback, apiError }) => {
               label="Busca tu Peli"
               onChange={(e) => setNameMovie(e.target.value)}
             />
-            <Button type="submit" onClick={() => setChecked(true)}>
+            <Button type="submit">
               <SearchIcon className={classes.icons} />
+            </Button>
+            <Button type="submit" onClick={() => setPage(page + 1)}>
+              next
             </Button>
           </form>
         </Grid>

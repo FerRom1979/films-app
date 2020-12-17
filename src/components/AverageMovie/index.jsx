@@ -7,12 +7,11 @@ import {
   Modal,
   Typography,
 } from "@material-ui/core";
-import BodyModal from "./bodyModal";
-import usesStyles from "./style";
-import Loading from "../Skeleton/index";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
+import BodyModal from "../BodyModal";
+import usesStyles from "./style";
 
-const MoviePopular = ({ moviePopular, infoMovie }) => {
+const AverageMovie = ({ averageMovie, infoMovie }) => {
   const classes = usesStyles();
   const [open, setOpen] = useState(false);
   const [movilModal, setMovilModal] = useState(infoMovie);
@@ -52,40 +51,36 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
       </Grid>
     </div>
   );
+
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         <Grid item sm={12}>
           <Typography variant="h5" className={classes.typography}>
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
           </Typography>
         </Grid>
-        {moviePopular &&
-          moviePopular.map((item, index) => (
+        {averageMovie &&
+          averageMovie.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              {item ? (
-                <Card className={classes.cards}>
-                  <CardActionArea onClick={() => openModal(item)}>
-                    <CardMedia
-                      className={classes.media}
-                      image={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-                    />
-                  </CardActionArea>
-
-                  <div>
-                    <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="simple-modal-title"
-                      aria-describedby="simple-modal-description"
-                    >
-                      {body}
-                    </Modal>
-                  </div>
-                </Card>
-              ) : (
-                <Loading />
-              )}
+              <Card className={classes.cards}>
+                <CardActionArea onClick={() => openModal(item)}>
+                  <CardMedia
+                    className={classes.media}
+                    image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                  />
+                </CardActionArea>
+              </Card>
+              <div>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                >
+                  {body}
+                </Modal>
+              </div>
             </Grid>
           ))}
       </Grid>
@@ -93,4 +88,4 @@ const MoviePopular = ({ moviePopular, infoMovie }) => {
   );
 };
 
-export default MoviePopular;
+export default AverageMovie;
