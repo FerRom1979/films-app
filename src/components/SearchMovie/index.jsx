@@ -13,7 +13,6 @@ const SearchMovie = ({ callback, apiError }) => {
   /* get name movie*/
   const getMovie = (e) => {
     e.preventDefault();
-    e.target.reset();
     callback(nameMovie, page);
   };
   useEffect(() => {

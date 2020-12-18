@@ -1,7 +1,7 @@
 import SearchMovie from "./components/SearchMovie/index";
 import Header from "./components/Header/index";
 import Billboard from "./components/Billboard/index";
-import { GetData } from "./assets/getData";
+import { GetData } from "./helpers/getData";
 import "./App.css";
 
 function App() {

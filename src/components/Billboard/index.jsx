@@ -1,23 +1,22 @@
 import ReactStars from "react-stars";
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, Button, Container } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { Grid, Typography, Container } from "@material-ui/core";
+
 import usesStyles from "./style";
 import MoviePopular from "../MoviePopular/index";
 import SearchMovie from "../MovieFinder/index";
 import AverageMovie from "../AverageMovie/index";
 
-const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
+const Billboard = ({ moviePopular, infoMovie, nameMovie }) => {
   const classes = usesStyles();
 
   const [averageMovie, setAverageMovie] = useState(moviePopular);
-  const [averaSearch, setAveraSearch] = useState(infoMovie);
+  const [averageSearch, setAverageSearch] = useState(infoMovie);
   const [startNumber, setStartNumber] = useState(10);
   const [movilModal] = useState(infoMovie);
 
   const ratingChanged = (newRating) => {
     setStartNumber(newRating * 2);
-    console.log(newRating);
   };
   const average = async () => {
     if (moviePopular) {
@@ -30,15 +29,16 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
       const Movie = await infoMovie.filter((item) => {
         return item.vote_average <= startNumber;
       });
-      setAveraSearch(Movie);
+      setAverageSearch(Movie);
     }
   };
   useEffect(() => {
     average();
-    setAveraSearch(infoMovie);
+    setAverageSearch(infoMovie);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startNumber, infoMovie]);
+
   return (
     <div>
       <Container maxWidth="xl">
@@ -47,54 +47,26 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
         <Grid item sm={12} className={classes.gridNorank}>
           <Typography className={classes.searchStart}>Filtrar</Typography>
 
-          <ReactStars count={10} onChange={ratingChanged} size={24} />
+          <ReactStars count={5} onChange={ratingChanged} size={24} />
         </Grid>
         {/* ********* resultados de peliculas seleccionadas******* */}
         {infoMovie ? (
           <Grid item sm={12}>
-            <Button
-              size="large"
-              startIcon={<ArrowBackIcon />}
-              onClick={() => (window.location.href = "/")}
-            >
-              volver
-            </Button>
-            {infoMovie && (
-              <Grid item sm={12}>
-                <SearchMovie
-                  infoMovie={averaSearch}
-                  movilModal={movilModal}
-                  averaSearch={averaSearch}
-                  nameMovie={nameMovie}
-                />
-              </Grid>
-            )}
+            <SearchMovie infoMovie={averageSearch} />
           </Grid>
-        ) : averageMovie && infoMovie === undefined ? (
-          averageMovie === undefined || averageMovie.length === 0 ? (
-            <Grid item sm={12} className={classes.gridNoStart}>
-              <Typography className={classes.noStart}>
-                no se encuentra peliculas con ese rango de calificacion
-              </Typography>
-            </Grid>
-          ) : (
-            <Grid item sm={12}>
-              <AverageMovie
-                averageMovie={averageMovie}
-                movilModal={movilModal}
-                infoMovie={infoMovie}
-              />
-            </Grid>
-          )
+        ) : averageMovie && infoMovie === null ? (
+          <Grid item sm={12}>
+            <AverageMovie
+              averageMovie={averageMovie}
+              movilModal={movilModal}
+              infoMovie={infoMovie}
+            />
+          </Grid>
         ) : (
-          infoMovie === undefined &&
+          infoMovie === null &&
           moviePopular && (
             <Grid item sm={12}>
-              <MoviePopular
-                moviePopular={moviePopular}
-                movilModal={movilModal}
-                infoMovie={infoMovie}
-              />
+              <MoviePopular moviePopular={moviePopular} />
             </Grid>
           )
         )}

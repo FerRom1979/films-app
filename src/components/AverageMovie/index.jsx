@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Grid,
   Card,
@@ -8,49 +8,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
-import BodyModal from "../BodyModal";
 import usesStyles from "./style";
+import { Config } from "../../helpers/config";
 
-const AverageMovie = ({ averageMovie, infoMovie }) => {
+const AverageMovie = ({ averageMovie, infoMovie, movilModal }) => {
   const classes = usesStyles();
-  const [open, setOpen] = useState(false);
-  const [movilModal, setMovilModal] = useState(infoMovie);
-  const [modalStyle] = useState(getModalStyle);
-
-  const openModal = (item) => {
-    setMovilModal(item);
-    handleOpen();
-  };
-
-  /* modal */
-  function rand() {
-    return Math.round(Math.random() * 20) - 10;
-  }
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
-
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <Grid item xs={12}>
-        <BodyModal movilModal={movilModal} />
-      </Grid>
-    </div>
-  );
+  const { openModal, handleClose, body, open } = Config();
 
   return (
     <div>
@@ -60,7 +23,8 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
             Lo más visto del 2020 <MovieFilterIcon className={classes.icons} />
           </Typography>
         </Grid>
-        {averageMovie &&
+        {averageMovie !== null || averageMovie.length !== 0 ? (
+          averageMovie &&
           averageMovie.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card className={classes.cards}>
@@ -72,7 +36,16 @@ const AverageMovie = ({ averageMovie, infoMovie }) => {
                 </CardActionArea>
               </Card>
             </Grid>
-          ))}
+          ))
+        ) : (
+          <Grid item sm={12}>
+            <AverageMovie
+              averageMovie={averageMovie}
+              movilModal={movilModal}
+              infoMovie={infoMovie}
+            />
+          </Grid>
+        )}
         <div>
           <Modal
             open={open}
