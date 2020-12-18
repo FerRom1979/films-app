@@ -21,5 +21,20 @@ const usesStyles = makeStyles((theme) => ({
   cardAction: {
     textAlign: "center",
   },
+  gridNoStart: {
+    margin: "auto",
+    textAlign: "center",
+    width: "100%",
+    height: "100vh",
+  },
+  noStart: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: 20,
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: 30,
+    },
+    color: "#ba000d",
+  },
 }));
 export default usesStyles;
