@@ -6,6 +6,7 @@ import {
   CardMedia,
   CardActions,
   Modal,
+  Typography,
 } from "@material-ui/core";
 import BodyModal from "../BodyModal";
 import usesStyles from "./style";
@@ -53,7 +54,7 @@ const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
   return (
     <div>
       <Grid container spacing={3}>
-        {infoMovie &&
+        {infoMovie && infoMovie.length !== 0 ? (
           infoMovie.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
               <Card className={classes.cards}>
@@ -66,7 +67,15 @@ const SearchMovie = ({ infoMovie, averaSearch, nameMovie }) => {
                 <CardActions className={classes.cardAction}></CardActions>
               </Card>
             </Grid>
-          ))}
+          ))
+        ) : (
+          <Grid item sm={12} className={classes.gridNoStart}>
+            <Typography className={classes.noStart}>
+              no se encuentra más peliculas por favor retroceda o realice una
+              nueva busqueda
+            </Typography>
+          </Grid>
+        )}
         <div>
           <Modal
             open={open}

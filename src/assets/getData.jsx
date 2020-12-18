@@ -7,7 +7,7 @@ export const GetData = () => {
   const [apiError, setApiError] = useState(false);
   const [apiErrorPopular, setapiErrorPopular] = useState(false);
   const [infoMovie, setInfoMovie] = useState();
-  const [numPage, setNumPage] = useState(false);
+  const [numPage, setNumPage] = useState(1);
 
   const URL_POPULAR = "https://api.themoviedb.org/3/discover/movie";
   const URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
@@ -20,7 +20,7 @@ export const GetData = () => {
 
   /* call api popular */
 
-  const searchMovie = async () => {
+  const searchMovie = async (numPage) => {
     try {
       /* mas populares */
       const res = await axios(
@@ -33,11 +33,11 @@ export const GetData = () => {
     }
   };
   /* get movie */
-  const getMovie = async (nameMovie) => {
+  const getMovie = async (nameMovie, numPage) => {
     if (nameMovie !== "") {
       try {
         const res = await axios(
-          `${URL_SEARCH}?api_key=${API_KEY}&query=${nameMovie}&language=es-AR`
+          `${URL_SEARCH}?api_key=${API_KEY}&query=${nameMovie}&language=es-AR&page=${numPage}`
         );
 
         setInfoMovie(res.data.results);
@@ -51,7 +51,8 @@ export const GetData = () => {
   };
   useEffect(() => {
     searchMovie(numPage);
-    getMovie(nameMovie);
+    getMovie(nameMovie, numPage);
+    /* setNumPage(1); */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nameMovie, numPage]);
 

@@ -6,8 +6,11 @@ const usesStyles = makeStyles((theme) => ({
   icons: {
     fontSize: 50,
   },
+  iconsAdd: {
+    fontSize: 40,
+  },
   search: {
-    maxWidth: 300,
+    maxWidth: 500,
     maxHeight: 200,
     margin: "auto",
     marginBottom: 10,

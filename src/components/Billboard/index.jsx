@@ -1,3 +1,4 @@
+import ReactStars from "react-stars";
 import React, { useState, useEffect } from "react";
 import { Grid, Typography, Button, Container } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -5,7 +6,6 @@ import usesStyles from "./style";
 import MoviePopular from "../MoviePopular/index";
 import SearchMovie from "../MovieFinder/index";
 import AverageMovie from "../AverageMovie/index";
-import ReactStars from "react-stars";
 
 const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
   const classes = usesStyles();
@@ -15,8 +15,9 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
   const [startNumber, setStartNumber] = useState(10);
   const [movilModal] = useState(infoMovie);
 
-  const ratingChanged = async (newRating) => {
+  const ratingChanged = (newRating) => {
     setStartNumber(newRating * 2);
+    console.log(newRating);
   };
   const average = async () => {
     if (moviePopular) {
@@ -32,10 +33,10 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
       setAveraSearch(Movie);
     }
   };
-
   useEffect(() => {
     average();
     setAveraSearch(infoMovie);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startNumber, infoMovie]);
   return (
@@ -46,12 +47,7 @@ const Billboard = ({ moviePopular, infoMovie, nameMovie, newNameMovie }) => {
         <Grid item sm={12} className={classes.gridNorank}>
           <Typography className={classes.searchStart}>Filtrar</Typography>
 
-          <ReactStars
-            count={5}
-            onChange={ratingChanged}
-            size={28}
-            color2={"#ffd700"}
-          />
+          <ReactStars count={10} onChange={ratingChanged} size={24} />
         </Grid>
         {/* ********* resultados de peliculas seleccionadas******* */}
         {infoMovie ? (
